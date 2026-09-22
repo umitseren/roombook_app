@@ -1,16 +1,13 @@
 # AGENTS.md — Project Rules
 
-> **STATUS: NOT CONFIGURED.** This workspace has not been adapted to a project yet.
-> The only correct first action is the bootstrap workflow (`workflows/bootstrap.md`).
-> Until bootstrap completes and rewrites this file, do not write application code.
+> Meeting-room booking demo (FastAPI + SQLModel + SQLite). All rules live in the docs below;
+> this file is a signpost — it points to them, it never copies them.
 
 ## Operating mode
-
-**Mode: unset** — bootstrap sets this to `lite` or `strict` (see `workflows/README.md`).
-Every workflow honors the gates of the current mode.
+**Mode: strict** — every workflow runs Intent → Clarify → Spec → **[GATE]** → Plan → **[GATE]**
+→ Build → Independent Review → **[GATE: triage]** → Verify → **[GATE: ship]**. See `workflows/README.md`.
 
 ## Invariant rules (these survive bootstrap — never delete or weaken them)
-
 1. **No spec, no code.** Every piece of work starts as a spec in `specs/active/` (from `specs/TEMPLATE.md`).
 2. **Plan before build.** A human approves the plan before any code is written.
 3. **The producer never verifies its own work.** Review and QA run in a separate session or a read-only subagent, working from files (diff + spec), never from the builder's chat.
@@ -21,14 +18,13 @@ Every workflow honors the gates of the current mode.
 8. **Uncertainty is surfaced, not assumed.** On ambiguity or a docs/code conflict: stop and use the matching recovery ramp (`prompts/recovery/`).
 
 ## Where things live
-
 | What | Where |
 |---|---|
 | Architecture & boundaries | `docs/architecture.md` |
-| Domain language & business rules | `docs/domain.md` |
-| Coding conventions | `docs/conventions.md` |
-| Testing rules | `docs/testing.md` |
-| Security rules | `docs/security.md` |
+| Domain language & business rules (BR-1..BR-4) | `docs/domain.md` |
+| Coding conventions (Python, UTC datetimes, errors) | `docs/conventions.md` |
+| Testing rules (pytest, 80% gate) | `docs/testing.md` |
+| Security rules (JWT, AuthZ, pip-audit) | `docs/security.md` |
 | Git & branching rules | `docs/git.md` |
 | Decisions with rationale (ADRs) | `docs/decisions/` |
 | Roles (who may do what) | `docs/roles/` |
